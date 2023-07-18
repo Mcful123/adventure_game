@@ -1,0 +1,68 @@
+bug: status bar flickers at the top of screen
+time found: 10/2, 9:35 PM
+time fixed: 9:48 PM
+notes: changed target_img in modex.C to 0x05A0
+
+bug: status bar not showing on screen
+time found: 10/2, 9:48 PM
+time fixed: 10:54 PM
+notes: changed the values in mode_x_CRTC
+
+bug: text on status bar malfunction. instead of letters, they're garbage
+time found: 10/2, 10:57 PM. paused at 1:40 AM, continued 10/3, 2:00 PM
+time fixed: 10/3, 4:50 PM
+notes: when saving the status bar buffer, I didn't account for the 4 planes used by mode X. 
+also math for getting the right index in the status bar array was wrong
+
+bug: keyboard input shows up on top of the room name
+time found: 4:51 PM
+time fixed: 5:00 PM
+notes: had to give X offset to make it right aligned
+
+bug: image wraps around in the horizontal axis when moving to the right
+time found: 5:05 PM
+time fixed: 8:02 PM (probably ~40 minutes of actual debugging, was doing other stuff)
+notes: had to change addr build buffer thing in vert_line
+
+bug: no '_' at the end of keyboard input
+time found: 6:20 PM
+time fixed: 7:00 PM
+notes: had to make a new copy of the keyboard input and append '_' and pass that to text_to_graphics
+
+bug: status message shows on top of room name and keyboard input
+time found: 7:00 PM
+time fixed: 7:39 PM
+notes: had to make sure the keyboard_copy variable is always used. Not sure why.
+************************************ checkpoint 1 ***************************
+bug: game black screen
+time worked: 3 days ish 
+notes: using strcpy with a char pointer in modex.c does some FUNKY stuff, I guess. changing that solved everything
+
+bug: screen had weird colors and weren't images but a bunch of random lines that vaguely looks like correct image
+time worked: 6 hours ish 
+notes: had to make sure and make all variables the right type and length so no overflow occurs. 
+
+bug: LED decimal not printing
+time worked: a couple hours 
+notes: had to rework the logic to add 0x10 to the buffer 
+
+bug: moving the image would be laggy and it would jump a lot. also would show random colors at the edges
+time worked: 5 hours
+notes: had to make global variables for the buttons pressed in input.c and some small logic stuff for synchronization 
+        code given in the disucssion slides
+
+bug: holding A or B or C would spam the entering rooms command
+time: 1 hour
+notes: just compared the last button to current and do nothing if repeated A, B, or C button is received
+
+bug: the left most LED would be the same as the 3rd. 
+time 40 minutes:
+notes: had to make make small changes to writing the LED buffer so it wouldn't skip LED that are turned offset
+
+bug: the arrow keys on keyboard didn't work
+time: 30 minutes
+note: had to delete some if and else things in the given input.c that disabled the keyboard
+
+bug: the arrow keys on keyboard would move the image and also type some letters
+time: 30 minutes
+note: had to delete a small block of code that did that in the given input.c
